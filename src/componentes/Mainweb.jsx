@@ -147,23 +147,23 @@ const Mainweb = () => {
         hour12: true
     }
 
-
+    
     const search = async (city) => {
+        const APPID = import.meta.env.VITE_APP_ID;
         if (city === "") {
             alert("Enter City Name");
             return;
         }
         try {
-            const url2 = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${1}&appid=${process.env.VITE_APP_ID}`;
+            const url2 = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${1}&appid=${import.meta.env.VITE_APP_ID}`;
             const response2 = await fetch(url2);
             const data2 = await response2.json();
 
             const lat = data2[0].lat;
             const lon = data2[0].lon
-            const url3 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.VITE_APP_ID}`;
+            const url3 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
             const response3 = await fetch(url3);
             const data3 = await response3.json();
-
 
             const day1 = new Date((data3.list[0].dt) * 1000);
             const day2 = new Date((data3.list[8].dt) * 1000);
@@ -276,7 +276,7 @@ const Mainweb = () => {
 
 
 
-            const url4 = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.VITE_APP_ID}`
+            const url4 = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&units=metric&appid=${import.meta.env.VITE_APP_ID}`
             const response4 = await fetch(url4)
             const data4 = await response4.json();
 
@@ -296,7 +296,7 @@ const Mainweb = () => {
                 aqimessage: aqiMessage[data4.list[0].main.aqi],
             })
 
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.VITE_APP_ID}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
 
             const response = await fetch(url);
             const data = await response.json();
